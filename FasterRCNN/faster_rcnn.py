@@ -507,14 +507,15 @@ if __name__ == "__main__":
     parser.add_argument('-in', '--dataset', type=str, required=True, help='Path to dataset folder')
     parser.add_argument('-ep', '--epoch_number', type=int, required=True, help='Number of epochs')
     parser.add_argument('-bs', '--batch_size', type=int, required=True, help='Batch size')
-    parser.add_argument('-pre', '--pretrain', type=bool, required=True, help='Use pretrained model')
+    parser.add_argument('-pre', '--pretrain', type=int, required=True, help='Use pretrained model (0 - False, 1 - True)')
     parser.add_argument('-ds', '--data_split', type=float, nargs='+', help='Train/test/val split')
     parser.add_argument('-lr', '--learning_rate', type=float, default=0.005, help='Learning rate')
     parser.add_argument('-mo', '--momentum', type=float, default=0.9, help='SGD momentum')
     parser.add_argument('-wd', '--weight_decay', type=float, default=0.0005, help='Weight decay')
     parser.add_argument('-save', '--save_after', type=int, default=10, help='Checkpoint save frequency')
     args = parser.parse_args()
-    
+
+    args.pretrain = False if args.pretrain == 0 else True
     main(
         directory      =   args.dataset, 
         num_epochs     =   args.epoch_number, 
